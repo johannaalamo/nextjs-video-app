@@ -1,19 +1,65 @@
-import { Card } from "@/components/ui/card"
-import VideoList from "@/components/VideoList";
+'use client'
 
-export default function Home() {
+import React, { useState } from 'react';
+import VideoPlayer from '@/components/VideoPlayer';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
-  const videos = [
-    { id: '1', title: 'Video 1', description: 'Primer video.' },
-    { id: '2', title: 'Video 2', description: 'Segundo video.' },
-  ];
+const videos = [
+  { id: '1', title: 'Video de flores', src: '/videos/flores.mp4' },
+  { id: '2', title: 'Toma a la ventana', src: '/videos/ventana.mp4'},
+  { id: '3', title: 'Bosque desde el dron', src: '/videos/bosque.mp4'},
+];
+
+const VideoGallery = () => {
+  const [currentVideo, setCurrentVideo] = useState(videos[0]);
+  const [loading, setLoading] = useState(false);
+
+  const handleVideoChange = (videoId: string) => {
+    const selectedVideo = videos.find(video => video.id === videoId);
+    if (selectedVideo) {
+      setLoading(true);
+      setTimeout(() => {
+        setCurrentVideo(selectedVideo);
+        setLoading(false);
+      }, 500);
+    }
+  };
 
   return (
-
-    <div>
+    <div className='p-6'>
       <Card>
-      <VideoList videos={videos}/>
+
+        <CardHeader>
+          <CardTitle>Video Gallery</CardTitle>
+          <CardDescription>{currentVideo.title}</CardDescription>
+        </CardHeader>
+
+        <CardContent>
+          {loading ? (
+            <video controls width="50%" height="500px"/>
+          ) : (
+            <VideoPlayer src={currentVideo.src} />
+          )}
+        </CardContent>
+
+        <CardFooter>
+          <div className="video-list">
+            {videos.map(video => (
+              <Button
+                key={video.id}
+                onClick={() => handleVideoChange(video.id)}
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
+              >
+                {video.title}
+              </Button>
+            ))}
+          </div>
+        </CardFooter>
+
       </Card>
     </div>
   );
-}
+};
+
+export default VideoGallery;
