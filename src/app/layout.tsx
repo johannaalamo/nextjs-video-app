@@ -11,17 +11,17 @@ const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <QueryClientProvider client={queryClient}>
-          <trpc.Provider client={trpcClient} queryClient={queryClient}>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
+          <QueryClientProvider client={queryClient}>
             {children}
-          </trpc.Provider>
-        </QueryClientProvider>
+          </QueryClientProvider>
+        </trpc.Provider>
       </body>
     </html>
   );

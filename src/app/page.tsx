@@ -1,73 +1,55 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import VideoPlayer from "@/components/VideoPlayer";
+import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { trpc } from "@/utils/trpc";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 const VideoGallery = () => {
   const { data: videos = [] } = trpc.getVideos.useQuery();
-  const [loading, setLoading] = useState(false);
-
-  const [currentVideo, setCurrentVideo] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const hashVideoId = window.location.hash.slice(1);
-      return videos.find(video => video.id === hashVideoId) || videos[0];
-    }
-    return videos[0];
-  });
-
-  useEffect(() => {
-    const hashVideoId = window.location.hash.slice(1);
-    if (hashVideoId) {
-      const savedVideo = videos.find(video => video.id === hashVideoId);
-      if (savedVideo) {
-        setCurrentVideo(savedVideo);
-      }
-    } else if (videos.length > 0) {
-      setCurrentVideo(videos[0]);
-    }
-  }, [videos]);
-
-  const handleVideoChange = (videoId: string) => {
-    const selectedVideo = videos.find(video => video.id === videoId);
-    if (selectedVideo) {
-      setCurrentVideo(selectedVideo);
-      window.location.hash = videoId;
-    }
-  };
-
+  
   return (
-    <div className="p-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Video Gallery</CardTitle>
-          <CardDescription>{currentVideo?.title}</CardDescription>
-        </CardHeader>
+    <div className="p-8">
+      <h1 className="text-xl font-medium leading-none">VidextTube</h1>
+      <Separator className="my-4" />
 
-        <CardContent>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <VideoPlayer key={currentVideo?.id} src={currentVideo?.src} videoId={currentVideo?.id} />
-          )}
-        </CardContent>
-
-        <CardFooter>
-          <div className="video-list">
-            {videos.map((video) => (
-              <Button
-                key={video.id}
-                onClick={() => handleVideoChange(video.id)}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
+      <div className="flex justify-center">
+        <Carousel className="w-3/4 p-8">
+          <CarouselContent className="-ml-1">
+            {videos.map((video, index) => (
+              <CarouselItem
+                key={index}
+                className="pl-5 md:basis-1/2 lg:basis-1/3"
               >
-                {video.title}
-              </Button>
+                <div className="p-1">
+                  <Link href={`/videos/${video.id}`}>
+                    <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <span className="text-2xl font-semibold">
+                          {index + 1}
+                        </span>
+                      </CardContent>
+                      <CardFooter>
+                        <p>{video.title}</p>
+                      </CardFooter>
+                    </Card>
+                  </Link>
+                </div>
+              </CarouselItem>
             ))}
-          </div>
-        </CardFooter>
-      </Card>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
     </div>
   );
 };

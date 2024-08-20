@@ -6,6 +6,8 @@ let videoViews: Record<string, number> = {
   '1': 0,
   '2': 0,
   '3': 0,
+  '4': 0,
+  '5': 0
 };
 
 export const appRouter = t.router({
@@ -14,6 +16,8 @@ export const appRouter = t.router({
       { id: '1', title: 'Video de flores', src: '/videos/flores.mp4' },
       { id: '2', title: 'Viaje en tren', src: '/videos/viaje.mp4' },
       { id: '3', title: 'Bosque desde el dron', src: '/videos/bosque.mp4' },
+      { id: '4', title: 'La luna de día', src: '/videos/luna.mp4' },
+      { id: '5', title: 'Mariposa', src: '/videos/mariposa.mp4' }
     ];
   }),
   

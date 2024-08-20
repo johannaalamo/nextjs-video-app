@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { trpc } from '@/utils/trpc';
+import { trpc } from "@/utils/trpc";
+import React, { useEffect, useRef } from "react";
 
 interface VideoPlayerProps {
   src: string;
@@ -7,7 +7,7 @@ interface VideoPlayerProps {
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, videoId }) => {
-  const { data: videoViews} = trpc.getVideoViews.useQuery();
+  const { data: videoViews } = trpc.getVideoViews.useQuery();
   const incrementViewMutation = trpc.incrementVideoView.useMutation();
 
   const hasIncremented = useRef(false);
@@ -17,18 +17,20 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, videoId }) => {
       incrementViewMutation.mutate(videoId);
       hasIncremented.current = true;
     }
-  }, [videoId]);
+  }, [videoId, incrementViewMutation]);
 
   const viewCount = videoViews ? videoViews[videoId] : 0;
 
   return (
-    <div className="video-player">
+    <div className="p-6 ">
       <video controls width="50%" height="500px">
         <source src={src} type="video/mp4" />
       </video>
-      <p>Visualizaciones: {viewCount}</p>
+      
+      <p>{viewCount} views</p>
     </div>
   );
 };
 
 export default VideoPlayer;
+
