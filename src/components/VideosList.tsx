@@ -10,11 +10,12 @@ export const VideosList = () => {
     if (isLoading) return <div>Loading...</div>;
 
     return (
-        <Card>
+
+        <Card className="p-5 border-2 border-slate-700 w-auto">
             <CardHeader>
-                <CardTitle>Videos</CardTitle>
-                <CardDescription>
-                    Aquí puedes gestionar tus videos y ver su rendimiento.
+                <CardTitle className="sm: text-base">Más videos</CardTitle>
+                <CardDescription className="sm: text-sm">
+                    Descubre el resto de videos con tan solo un click sobre ellos.
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -27,7 +28,7 @@ export const VideosList = () => {
                                         <Image alt={video.title} className="aspect-square rounded-md object-cover" height="64" src={video.image} width="64" />
                                     </TableCell>
 
-                                    <TableCell className="font-medium">
+                                    <TableCell className="lg:text-base font-medium">
                                         {video.title}
                                     </TableCell>
                                 </Link>
@@ -42,5 +43,6 @@ export const VideosList = () => {
                 </div>
             </CardFooter>
         </Card>
+
     );
 };

@@ -23,14 +23,13 @@ const VideoPage = () => {
     if (!video) return <div>Video not found</div>;
 
     return (
-        <div className="p-6 flex-col justify-center">
-
+        <div className="p-6 flex-col justify-center lg:flex-col md:flex-row">
             <div className="flex py-6 gap-3">
-                <Button 
-                variant="outline" 
-                size="icon" 
-                className="h-7 w-7 align-middle"
-                onClick={() => router.push('/')}
+                <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-7 w-7 align-middle"
+                    onClick={() => router.push('/')}
                 >
                     <ChevronLeft className="h-4 w-4" />
                     <span className="sr-only">Back</span>
@@ -39,17 +38,16 @@ const VideoPage = () => {
             </div>
 
 
-            <Card>
+            <Card className="mx-11 p-5 bg-slate-900 border-2 border-slate-700">
                 <CardHeader>
                     <CardTitle>{video?.title}</CardTitle>
-                    <CardDescription>{video?.title}</CardDescription>
                 </CardHeader>
 
                 <CardContent className="flex flex-col justify-center gap-5">
                     {isLoading ? (
                         <div>Cargando...</div>
                     ) : (
-                        <div className="flex justify-center gap-5">
+                        <div className="flex-row justify-between gap-5 xl:flex-row lg:flex md:flex-col sm:flex-col">
                             <VideoPlayer
                                 key={video?.id}
                                 src={video?.src}
@@ -59,7 +57,7 @@ const VideoPage = () => {
                         </div>
 
                     )}
-                    <div className="">
+                    <div>
                         <CommentsTable />
                     </div>
                 </CardContent>
@@ -69,4 +67,3 @@ const VideoPage = () => {
 };
 
 export default VideoPage;
-

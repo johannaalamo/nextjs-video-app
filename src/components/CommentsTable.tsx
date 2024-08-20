@@ -4,14 +4,14 @@ import React from "react";
 
 export const CommentsTable = () => {
     return (
-        <Card x-chunk="dashboard-01-chunk-5">
+        <Card x-chunk="dashboard-01-chunk-5" className="border-2 border-slate-700 w-full">
             <CardHeader>
                 <CardTitle>Comentarios</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-8">
                 <div className="flex items-center gap-4">
                     <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/01.png" alt="Avatar" />
+
                         <AvatarFallback>OM</AvatarFallback>
                     </Avatar>
                     <div className="grid gap-1">
@@ -19,14 +19,14 @@ export const CommentsTable = () => {
                             Olivia Martin
                         </p>
                         <p className="text-sm text-muted-foreground">
-                            olivia.martin@email.com
+                            Muy buen video!!
                         </p>
                     </div>
-                  
+
                 </div>
                 <div className="flex items-center gap-4">
                     <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/02.png" alt="Avatar" />
+
                         <AvatarFallback>JL</AvatarFallback>
                     </Avatar>
                     <div className="grid gap-1">
@@ -34,14 +34,14 @@ export const CommentsTable = () => {
                             Jackson Lee
                         </p>
                         <p className="text-sm text-muted-foreground">
-                            jackson.lee@email.com
+                            ¡Qué maravilla!
                         </p>
                     </div>
-                    
+
                 </div>
                 <div className="flex items-center gap-4">
                     <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/03.png" alt="Avatar" />
+
                         <AvatarFallback>IN</AvatarFallback>
                     </Avatar>
                     <div className="grid gap-1">
@@ -49,27 +49,13 @@ export const CommentsTable = () => {
                             Isabella Nguyen
                         </p>
                         <p className="text-sm text-muted-foreground">
-                            isabella.nguyen@email.com
+                            Un comentario con hate
                         </p>
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
                     <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/04.png" alt="Avatar" />
-                        <AvatarFallback>WK</AvatarFallback>
-                    </Avatar>
-                    <div className="grid gap-1">
-                        <p className="text-sm font-medium leading-none">
-                            William Kim
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                            will@email.com
-                        </p>
-                    </div>
-                </div>
-                <div className="flex items-center gap-4">
-                    <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/05.png" alt="Avatar" />
+
                         <AvatarFallback>SD</AvatarFallback>
                     </Avatar>
                     <div className="grid gap-1">
@@ -77,10 +63,9 @@ export const CommentsTable = () => {
                             Sofia Davis
                         </p>
                         <p className="text-sm text-muted-foreground">
-                            sofia.davis@email.com
+                            Primer comentario
                         </p>
                     </div>
-                
                 </div>
             </CardContent>
         </Card>
