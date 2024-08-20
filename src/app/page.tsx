@@ -4,31 +4,37 @@ import React, { useState, useEffect } from "react";
 import VideoPlayer from "@/components/VideoPlayer";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
-const videos = [
-  { id: "1", title: "Video de flores", src: "/videos/flores.mp4" },
-  { id: "2", title: "Viaje en tren", src: "/videos/viaje.mp4" },
-  { id: "3", title: "Bosque desde el dron", src: "/videos/bosque.mp4" },
-];
+import { trpc } from "@/utils/trpc";
 
 const VideoGallery = () => {
-  const [currentVideo, setCurrentVideo] = useState(videos[0]);
+  const { data: videos = [] } = trpc.getVideos.useQuery();
   const [loading, setLoading] = useState(false);
 
+  const [currentVideo, setCurrentVideo] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const hashVideoId = window.location.hash.slice(1);
+      return videos.find(video => video.id === hashVideoId) || videos[0];
+    }
+    return videos[0];
+  });
+
   useEffect(() => {
-    if (videos.length > 0 && !currentVideo) {
+    const hashVideoId = window.location.hash.slice(1);
+    if (hashVideoId) {
+      const savedVideo = videos.find(video => video.id === hashVideoId);
+      if (savedVideo) {
+        setCurrentVideo(savedVideo);
+      }
+    } else if (videos.length > 0) {
       setCurrentVideo(videos[0]);
     }
-  }, [videos, currentVideo]);
+  }, [videos]);
 
   const handleVideoChange = (videoId: string) => {
-    const selectedVideo = videos.find((video) => video.id === videoId);
+    const selectedVideo = videos.find(video => video.id === videoId);
     if (selectedVideo) {
-      setLoading(true);
-      setTimeout(() => {
-        setCurrentVideo(selectedVideo);
-        setLoading(false);
-      }, 200);
+      setCurrentVideo(selectedVideo);
+      window.location.hash = videoId;
     }
   };
 
@@ -44,7 +50,7 @@ const VideoGallery = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <VideoPlayer key={currentVideo.id} src={currentVideo.src} />
+            <VideoPlayer key={currentVideo?.id} src={currentVideo?.src} videoId={currentVideo?.id} />
           )}
         </CardContent>
 

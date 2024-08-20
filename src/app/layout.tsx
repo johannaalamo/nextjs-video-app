@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { trpc, trpcClient } from "@/utils/trpc";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <trpc.Provider client={trpcClient} queryClient={queryClient}>
-          {children}
-        </trpc.Provider>
+        <QueryClientProvider client={queryClient}>
+          <trpc.Provider client={trpcClient} queryClient={queryClient}>
+            {children}
+          </trpc.Provider>
+        </QueryClientProvider>
       </body>
     </html>
   );
