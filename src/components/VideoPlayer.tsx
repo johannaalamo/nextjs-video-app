@@ -22,12 +22,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, videoId }) => {
   const viewCount = videoViews ? videoViews[videoId] : 0;
 
   return (
-    <div className="p-6 ">
-      <video controls width="50%" height="500px">
+    <div className="flex-col justify-items-center">
+      <video controls width="auto" height="400px">
         <source src={src} type="video/mp4" />
       </video>
-      
-      <p>{viewCount} views</p>
+      <div className="my-3">
+        <p>{viewCount} views</p>
+      </div>
     </div>
   );
 };
