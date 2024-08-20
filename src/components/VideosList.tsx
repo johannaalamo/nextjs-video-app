@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableRow } from "./ui/table";
 import { trpc } from "@/utils/trpc";
 import Link from "next/link";
 import Image from 'next/image';
+import React from "react";
 
 export const VideosList = () => {
     const { data: videos = [], isLoading } = trpc.getVideos.useQuery();

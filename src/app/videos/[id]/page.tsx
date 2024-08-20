@@ -1,5 +1,6 @@
 'use client'
 
+import React from "react";
 import VideoPlayer from "@/components/VideoPlayer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/utils/trpc";
