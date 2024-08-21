@@ -22,15 +22,15 @@ export const VideosList = () => {
             <CardContent>
                 <Table>
                     <TableBody>
-                        {videos?.map((video) => (
+                        {videos?.map((video: any) => (
                             <TableRow key={video.id}>
-                                <Link href={`/videos/${video.id}`}>
+                                <Link href={`/videos/${video?.id}`}>
                                     <TableCell className="hidden sm:table-cell">
-                                        <Image alt={video.title} className="aspect-square rounded-md object-cover" height="64" src={video.image} width="64" />
+                                        <Image alt={video?.title} className="aspect-square rounded-md object-cover" height="64" src={video?.image} width="64" />
                                     </TableCell>
 
                                     <TableCell className="lg:text-base font-medium">
-                                        {video.title}
+                                        {video?.title}
                                     </TableCell>
                                 </Link>
                             </TableRow>
@@ -40,7 +40,7 @@ export const VideosList = () => {
             </CardContent>
             <CardFooter>
                 <div className="text-xs text-muted-foreground">
-                    Mostrando <strong>{videos.length}</strong> videos
+                    Mostrando <strong>{videos?.length}</strong> videos
                 </div>
             </CardFooter>
         </Card>

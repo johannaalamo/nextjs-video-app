@@ -8,7 +8,9 @@ import { useParams, useRouter } from "next/navigation";
 import { CommentsTable } from "@/components/CommentsTable";
 import { VideosList } from "@/components/VideosList";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
+import { FaArrowLeft } from 'react-icons/fa';
+
+// import { ChevronLeft } from "lucide-react";
 
 const VideoPage = () => {
 
@@ -17,7 +19,7 @@ const VideoPage = () => {
     const id = Array.isArray(params?.id) ? params?.id[0] : params?.id;
 
     const { data: video, isLoading } = trpc.getVideos.useQuery(undefined, {
-        select: (videos) => videos.find(v => v.id === id),
+        select: (videos) => videos.find((v: any) => v.id === id),
     });
 
     if (isLoading) return <div>Loading...</div>;
@@ -29,12 +31,13 @@ const VideoPage = () => {
                 <Button
                     variant="outline"
                     size="icon"
-                    className="h-7 w-7 align-middle"
-                    onClick={() => router.push('/')}
+                    className="h-8 w-8 align-middle text-slate-700"
+                    onClick={() => router?.push('/')}
                 >
-                    <ChevronLeft className="h-4 w-4" />
-                    <span className="sr-only">Back</span>
+
+                    <FaArrowLeft className="h-6 w-6 " />
                 </Button>
+
                 <h1 className="text-2xl font-medium align-middle ">VidextTube</h1>
             </div>
 

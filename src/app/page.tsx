@@ -29,7 +29,7 @@ const VideoGallery = () => {
       <div className="flex justify-center">
         <Carousel className="w-3/4 p-8">
           <CarouselContent className="-ml-1">
-            {videos?.map((video, index) => (
+            {videos?.map((video: any, index: any) => (
               <CarouselItem
                 key={index}
                 className="pl-5 md:basis-1/2 lg:basis-1/3"

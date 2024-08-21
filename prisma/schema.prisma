@@ -13,4 +13,5 @@ model Video {
   src    String
   image  String
   views  Int      @default(0)
+  likes  Int      @default(0)
 }
