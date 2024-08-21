@@ -16,6 +16,8 @@ jest.mock('@/utils/trpc', () => ({
   },
 }));
 
+//Dejo comentado que hace cada test
+
 // Test para verificar que la mutación se llama al montar el componente
 test('llama a incrementViewMutation cuando se monta el video', () => {
   const mockMutate = jest.fn();
