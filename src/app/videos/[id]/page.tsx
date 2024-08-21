@@ -10,8 +10,6 @@ import { VideosList } from "@/components/VideosList";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft } from 'react-icons/fa';
 
-// import { ChevronLeft } from "lucide-react";
-
 const VideoPage = () => {
 
     const params = useParams();

@@ -23,7 +23,7 @@ export const VideosList = () => {
                 <Table>
                     <TableBody>
                         {videos?.map((video: any) => (
-                            <TableRow key={video.id}>
+                            <TableRow key={video?.id}>
                                 <Link href={`/videos/${video?.id}`}>
                                     <TableCell className="hidden sm:table-cell">
                                         <Image alt={video?.title} className="aspect-square rounded-md object-cover" height="64" src={video?.image} width="64" />

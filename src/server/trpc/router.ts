@@ -5,13 +5,12 @@ const t = initTRPC.create();
 
 export const appRouter = t.router({
   getVideos: t.procedure.query(async () => {
-    return await prisma.video.findMany(); // Recupera todos los videos desde la base de datos
+    return await prisma.video.findMany();
   }),
 
   getVideoViews: t.procedure.query(async () => {
     const videos = await prisma.video.findMany();
-
-    // Definimos el tipo de videoViews para incluir views y likes
+    
     const videoViews: Record<string, { views: number; likes: number }> = {};
 
     videos.forEach((video: any) => {

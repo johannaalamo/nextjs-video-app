@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
 const VideoGallery = () => {
-  const { data: videos = [] } = trpc.getVideos.useQuery();
+  const { data: videos } = trpc.getVideos.useQuery();
 
   console.log(videos)
 
