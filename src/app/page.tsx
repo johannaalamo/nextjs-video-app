@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { trpc } from "@/utils/trpc";
 import {
   Carousel,
@@ -16,6 +16,8 @@ import Link from "next/link";
 const VideoGallery = () => {
   const { data: videos = [] } = trpc.getVideos.useQuery();
 
+  console.log(videos)
+
   return (
     <div className="p-8">
       <h1 className="text-3xl font-medium ">VidextTube</h1>
@@ -27,7 +29,7 @@ const VideoGallery = () => {
       <div className="flex justify-center">
         <Carousel className="w-3/4 p-8">
           <CarouselContent className="-ml-1">
-            {videos.map((video, index) => (
+            {videos?.map((video, index) => (
               <CarouselItem
                 key={index}
                 className="pl-5 md:basis-1/2 lg:basis-1/3"

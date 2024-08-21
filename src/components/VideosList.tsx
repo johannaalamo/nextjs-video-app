@@ -22,7 +22,7 @@ export const VideosList = () => {
             <CardContent>
                 <Table>
                     <TableBody>
-                        {videos.map((video) => (
+                        {videos?.map((video) => (
                             <TableRow key={video.id}>
                                 <Link href={`/videos/${video.id}`}>
                                     <TableCell className="hidden sm:table-cell">
