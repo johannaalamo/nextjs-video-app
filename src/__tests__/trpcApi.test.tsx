@@ -7,16 +7,21 @@ jest.mock('@/utils/trpc', () => ({
   trpc: {
     getVideoViews: {
       useQuery: jest.fn().mockReturnValue({
-        data: { "1": 100 },
+        data: { "1": { views: 100, likes: 10 } },
       }),
     },
     incrementVideoView: {
-      useMutation: jest.fn(),
+      useMutation: jest.fn().mockReturnValue({
+        mutate: jest.fn(),
+      }),
+    },
+    incrementVideoLike: {
+      useMutation: jest.fn().mockReturnValue({
+        mutate: jest.fn(),
+      }),
     },
   },
 }));
-
-//Dejo comentado que hace cada test
 
 // Test para verificar que la mutación se llama al montar el componente
 test('llama a incrementViewMutation cuando se monta el video', () => {

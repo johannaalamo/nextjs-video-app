@@ -7,11 +7,20 @@ jest.mock('@/utils/trpc', () => ({
   trpc: {
     getVideoViews: {
       useQuery: jest.fn().mockReturnValue({
-        data: { "1": 100 },
+        data: {
+          "1": { views: 100, likes: 10 },
+        },
       }),
     },
     incrementVideoView: {
-      useMutation: jest.fn(),
+      useMutation: jest.fn().mockReturnValue({
+        mutate: jest.fn(),
+      }),
+    },
+    incrementVideoLike: {
+      useMutation: jest.fn().mockReturnValue({
+        mutate: jest.fn(),
+      }),
     },
   },
 }));
@@ -29,29 +38,29 @@ test('llama a incrementViewMutation cuando se monta el video', () => {
 });
 
 test('renderiza el elemento de video con el src y los atributos correctos', () => {
-    const { container } = render(<VideoPlayer src="video.mp4" videoId="1" />);
-  
-    const videoElement = container.querySelector('video');
-  
-    expect(videoElement).toBeInTheDocument();
-    expect(videoElement).toHaveAttribute('src', 'video.mp4');
-    expect(videoElement).toHaveAttribute('controls');
+  const { container } = render(<VideoPlayer src="video.mp4" videoId="1" />);
+
+  const videoElement = container.querySelector('video');
+
+  expect(videoElement).toBeInTheDocument();
+  expect(videoElement).toHaveAttribute('src', 'video.mp4');
+  expect(videoElement).toHaveAttribute('controls');
+});
+
+test('incrementa el contador de vistas cuando se monta el video', () => {
+  const mockMutate = jest.fn();
+
+  (trpc.incrementVideoView.useMutation as jest.Mock).mockReturnValue({
+    mutate: mockMutate,
   });
-  
-  test('incrementa el contador de vistas cuando se monta el video', () => {
-    const mockMutate = jest.fn();
-  
-    (trpc.incrementVideoView.useMutation as jest.Mock).mockReturnValue({
-      mutate: mockMutate,
-    });
-  
-    render(<VideoPlayer src="video.mp4" videoId="1" />);
-  
-    expect(mockMutate).toHaveBeenCalledWith("1");
-  });
-  
-  test('muestra el contador de vistas correcto', () => {
-    const { getByText } = render(<VideoPlayer src="video.mp4" videoId="1" />);
-  
-    expect(getByText('100 views')).toBeInTheDocument();
-  });
+
+  render(<VideoPlayer src="video.mp4" videoId="1" />);
+
+  expect(mockMutate).toHaveBeenCalledWith("1");
+});
+
+test('muestra el contador de vistas correcto', () => {
+  const { getByText } = render(<VideoPlayer src="video.mp4" videoId="1" />);
+
+  expect(getByText('100 views')).toBeInTheDocument();
+});

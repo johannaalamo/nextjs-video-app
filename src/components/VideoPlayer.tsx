@@ -41,7 +41,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, videoId }) => {
   const likeCount = localLikes !== null ? localLikes : 0;
 
   return (
-    
+
     <div className="flex-col justify-items-center w-4/5">
       <video src={src} controls />
       <div className='flex justify-between p-3'>
