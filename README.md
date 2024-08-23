@@ -150,7 +150,7 @@ Para ejecutar las pruebas unitarias, utiliza el siguiente comando:
 
   ```bash
     npm test
-    ```
+  ```
 
 Esto ejecutará todas las pruebas definidas en el proyecto y te proporcionará un informe de los resultados.
 
