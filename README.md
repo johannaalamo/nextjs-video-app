@@ -147,11 +147,10 @@ El proyecto también incluye pruebas unitarias para las rutas API. Estas pruebas
 
 Para ejecutar las pruebas unitarias, utiliza el siguiente comando:
 
-bash
 
-Copiar código
-
-`npm test` 
+  ```bash
+    npm test
+    ```
 
 Esto ejecutará todas las pruebas definidas en el proyecto y te proporcionará un informe de los resultados.
 
